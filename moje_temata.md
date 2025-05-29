@@ -4,6 +4,8 @@
 
 ---
 
+
+
 ### 1. Rezervační systém na sportoviště
 Uživatelé mohou rezervovat sportoviště v různých časech.
 
@@ -16,6 +18,9 @@ Uživatelé mohou rezervovat sportoviště v různých časech.
   - `date`
   - `time_slot`
 
+
+- **CRUDL (editovatelné)**: sports, reservations
+
 ### 2. Správa jídelníčku ve školní jídelně
 Evidence jídel a jejich kategorií, možnost aktualizace jídelníčku.
 
@@ -24,6 +29,9 @@ Evidence jídel a jejich kategorií, možnost aktualizace jídelníčku.
   - `description`
 - **Tabulka 2** - `categories`
   - `name`
+
+
+- **CRUDL (editovatelné)**: meals, categories
 
 ### 3. Evidence návštěvníků muzea
 Záznam návštěvníků a jejich návštěv jednotlivých expozic.
@@ -39,6 +47,10 @@ Záznam návštěvníků a jejich návštěv jednotlivých expozic.
   - `exhibit_id`
   - `visit_date`
 
+
+- **CRUDL (editovatelné)**: visitors, exhibits
+- **Neměnitelná tabulka (seedovaná při spuštění)**: visits
+
 ### 4. Správa domácích mazlíčků v útulku
 Útulek spravuje zvířata a jejich majitele.
 
@@ -49,6 +61,9 @@ Záznam návštěvníků a jejich návštěv jednotlivých expozic.
   - `firstname`
   - `lastname`
   - `phone`
+
+
+- **CRUDL (editovatelné)**: pets, owners
 
 ### 5. Správa kurzů v jazykové škole
 Záznam kurzů, lektorů a přihlášených studentů.
@@ -62,6 +77,10 @@ Záznam kurzů, lektorů a přihlášených studentů.
 - **Tabulka 3** - `enrollments`
   - `student_name`
   - `course_id`
+
+
+- **CRUDL (editovatelné)**: courses, teachers
+- **Neměnitelná tabulka (seedovaná při spuštění)**: enrollments
 
 ### 6. Správa aut v autopůjčovně
 Půjčovna eviduje auta, zákazníky a výpůjčky.
@@ -79,6 +98,10 @@ Půjčovna eviduje auta, zákazníky a výpůjčky.
   - `rental_date`
   - `return_date`
 
+
+- **CRUDL (editovatelné)**: cars, customers
+- **Neměnitelná tabulka (seedovaná při spuštění)**: rentals
+
 ### 7. Sklad náhradních dílů
 Evidence dílů, dodavatelů a objednávek.
 
@@ -93,6 +116,10 @@ Evidence dílů, dodavatelů a objednávek.
   - `supplier_id`
   - `order_date`
 
+
+- **CRUDL (editovatelné)**: parts, suppliers
+- **Neměnitelná tabulka (seedovaná při spuštění)**: orders
+
 ### 8. Systém hodnocení restaurací
 Uživatelé hodnotí restaurace a přidávají komentáře.
 
@@ -105,6 +132,9 @@ Uživatelé hodnotí restaurace a přidávají komentáře.
   - `rating`
   - `comment`
 
+
+- **CRUDL (editovatelné)**: restaurants, reviews
+
 ### 9. Správa inventáře kanceláře
 Sledování zásob, kategorií a dodavatelů.
 
@@ -116,6 +146,10 @@ Sledování zásob, kategorií a dodavatelů.
 - **Tabulka 3** - `suppliers`
   - `name`
   - `contact`
+
+
+- **CRUDL (editovatelné)**: items, categories
+- **Neměnitelná tabulka (seedovaná při spuštění)**: suppliers
 
 ### 10. Evidence úkolů v týmu
 Správa projektových úkolů, přiřazení k členům týmu.
@@ -131,6 +165,10 @@ Správa projektových úkolů, přiřazení k členům týmu.
   - `task_id`
   - `team_member_id`
 
+
+- **CRUDL (editovatelné)**: tasks, team_members
+- **Neměnitelná tabulka (seedovaná při spuštění)**: assignments
+
 ### 11. Správa parkovacích míst v garáži
 Rezervace a správa parkovacích míst.
 
@@ -142,6 +180,9 @@ Rezervace a správa parkovacích míst.
   - `vehicle_plate`
   - `reservation_date`
 
+
+- **CRUDL (editovatelné)**: parking_spots, reservations
+
 ### 12. Katalog filmů a hodnocení
 Evidence filmů a uživatelských hodnocení.
 
@@ -152,6 +193,9 @@ Evidence filmů a uživatelských hodnocení.
   - `user_name`
   - `movie_id`
   - `rating`
+
+
+- **CRUDL (editovatelné)**: movies, ratings
 
 ### 13. Správa fitness centra
 Záznam členů, cvičebních plánů a rezervací lekcí.
@@ -167,6 +211,10 @@ Záznam členů, cvičebních plánů a rezervací lekcí.
   - `class_id`
   - `reservation_date`
 
+
+- **CRUDL (editovatelné)**: members, workout_plans
+- **Neměnitelná tabulka (seedovaná při spuštění)**: class_reservations
+
 ### 14. Evidence návštěv v zoo
 Záznam návštěvníků a zvířat, která viděli.
 
@@ -181,6 +229,10 @@ Záznam návštěvníků a zvířat, která viděli.
   - `animal_id`
   - `visit_date`
 
+
+- **CRUDL (editovatelné)**: visitors, animals
+- **Neměnitelná tabulka (seedovaná při spuštění)**: visits
+
 ### 15. Správa knih v antikvariátu
 Evidování knih, autorů a žánrů.
 
@@ -191,6 +243,10 @@ Evidování knih, autorů a žánrů.
   - `lastname`
 - **Tabulka 3** - `genres`
   - `name`
+
+
+- **CRUDL (editovatelné)**: books, authors
+- **Neměnitelná tabulka (seedovaná při spuštění)**: genres
 
 ### 16. Systém správy konferencí
 Evidence konferencí, řečníků a účastníků.
@@ -204,6 +260,10 @@ Evidence konferencí, řečníků a účastníků.
 - **Tabulka 3** - `attendees`
   - `conference_id`
   - `attendee_name`
+
+
+- **CRUDL (editovatelné)**: conferences, speakers
+- **Neměnitelná tabulka (seedovaná při spuštění)**: attendees
 
 ### 17. Správa objednávek v e-shopu
 Záznam produktů, zákazníků a objednávek.
@@ -219,6 +279,10 @@ Záznam produktů, zákazníků a objednávek.
   - `customer_id`
   - `order_date`
 
+
+- **CRUDL (editovatelné)**: products, customers
+- **Neměnitelná tabulka (seedovaná při spuštění)**: orders
+
 ### 18. Evidence darů pro charitu
 Záznam dárců a darovaných věcí.
 
@@ -229,6 +293,9 @@ Záznam dárců a darovaných věcí.
   - `donor_id`
   - `item`
   - `date`
+
+
+- **CRUDL (editovatelné)**: donors, donations
 
 ### 19. Správa recepce hotelu
 Evidence pokojů, hostů a rezervací.
@@ -245,6 +312,10 @@ Evidence pokojů, hostů a rezervací.
   - `checkin_date`
   - `checkout_date`
 
+
+- **CRUDL (editovatelné)**: rooms, guests
+- **Neměnitelná tabulka (seedovaná při spuštění)**: bookings
+
 ### 20. Správa zaměstnanců firmy
 Záznam zaměstnanců, oddělení a projektů.
 
@@ -258,6 +329,10 @@ Záznam zaměstnanců, oddělení a projektů.
   - `name`
   - `department_id`
 
+
+- **CRUDL (editovatelné)**: employees, departments
+- **Neměnitelná tabulka (seedovaná při spuštění)**: projects
+
 ### 21. Správa školních tříd
 Evidence tříd, žáků a třídních učitelů.
 
@@ -270,6 +345,10 @@ Evidence tříd, žáků a třídních učitelů.
 - **Tabulka 3** - `class_teachers`
   - `class_id`
   - `teacher_name`
+
+
+- **CRUDL (editovatelné)**: classes, students
+- **Neměnitelná tabulka (seedovaná při spuštění)**: class_teachers
 
 ### 22. Správa výpůjček v knihovně
 Záznam čtenářů, knih a výpůjček.
@@ -285,6 +364,10 @@ Záznam čtenářů, knih a výpůjček.
   - `loan_date`
   - `return_date`
 
+
+- **CRUDL (editovatelné)**: readers, books
+- **Neměnitelná tabulka (seedovaná při spuštění)**: loans
+
 ### 23. Správa soutěžících v soutěži
 Evidence soutěžících, kategorií a výsledků.
 
@@ -298,6 +381,10 @@ Evidence soutěžících, kategorií a výsledků.
   - `category_id`
   - `score`
 
+
+- **CRUDL (editovatelné)**: contestants, categories
+- **Neměnitelná tabulka (seedovaná při spuštění)**: results
+
 ### 24. Správa objednávek v restauraci
 Záznam jídel, stolů a objednávek.
 
@@ -309,6 +396,10 @@ Záznam jídel, stolů a objednávek.
   - `dish_id`
   - `table_id`
   - `order_time`
+
+
+- **CRUDL (editovatelné)**: dishes, tables
+- **Neměnitelná tabulka (seedovaná při spuštění)**: orders
 
 ### 25. Správa návštěv v nemocnici
 Záznam pacientů, lékařů a návštěv.
@@ -325,6 +416,10 @@ Záznam pacientů, lékařů a návštěv.
   - `doctor_id`
   - `visit_date`
 
+
+- **CRUDL (editovatelné)**: patients, doctors
+- **Neměnitelná tabulka (seedovaná při spuštění)**: visits
+
 ### 26. Správa vozového parku firmy
 Evidence vozidel, řidičů a jízd.
 
@@ -339,6 +434,10 @@ Evidence vozidel, řidičů a jízd.
   - `driver_id`
   - `trip_date`
 
+
+- **CRUDL (editovatelné)**: vehicles, drivers
+- **Neměnitelná tabulka (seedovaná při spuštění)**: trips
+
 ### 27. Správa inventáře ve skladu knih
 Evidování knih, skladových míst a zásob.
 
@@ -350,6 +449,10 @@ Evidování knih, skladových míst a zásob.
   - `book_id`
   - `location_id`
   - `quantity`
+
+
+- **CRUDL (editovatelné)**: books, locations
+- **Neměnitelná tabulka (seedovaná při spuštění)**: stock
 
 ### 28. Správa projektů a úkolů
 Evidence projektů, úkolů a členů týmu.
@@ -366,6 +469,9 @@ Evidence projektů, úkolů a členů týmu.
   - `task_id`
   - `team_member_id`
 
+
+- **CRUDL (editovatelné)**: projects, tasks
+
 ### 29. Správa objednávek květin
 Záznam květin, zákazníků a objednávek.
 
@@ -378,6 +484,10 @@ Záznam květin, zákazníků a objednávek.
   - `flower_id`
   - `customer_id`
   - `order_date`
+
+
+- **CRUDL (editovatelné)**: flowers, customers
+- **Neměnitelná tabulka (seedovaná při spuštění)**: orders
 
 ### 30. Správa kurzů a studentů
 Evidence kurzů, studentů a jejich zápisů.
@@ -396,3 +506,6 @@ Evidence kurzů, studentů a jejich zápisů.
 ---
 
 
+
+- **CRUDL (editovatelné)**: courses, students
+- **Neměnitelná tabulka (seedovaná při spuštění)**: enrollments
