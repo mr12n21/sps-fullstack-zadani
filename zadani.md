@@ -67,32 +67,35 @@ CRUDL znamená, že má uživatel možnost vykonat operace
 ### 1. Rezervační systém na sportoviště
 Uživatelé mohou rezervovat sportoviště v různých časech.
 
-- **Tabulka 1** - `sports` - seznam sportovišť
+- **Tabulka 1** - `sport_locations` - seznam sportovišť
   - `name`
   - `location`
 - **Tabulka 2** - `reservations` - rezervace
-  - `user_name`
-  - `sport_id`
+  - `firstname`
+  - `lastname`
   - `date`
   - `time_slot`
+- **Tabulka 3** - `sports` - seznam sportů, ze kterých je možné vybírat při rezervaci
+  - `name`
 
-
-- **CRUDL (editovatelné)**: sports, reservations
+- **CRUDL (editovatelné z UI)**: sport_locations, reservations
+- **Neměnitelná tabulka (seedovaná při seeding)**: sports
 
 ### 2. Správa jídelníčku ve školní jídelně
-Evidence jídel a jejich kategorií, možnost aktualizace jídelníčku.
+Školní jídelna si potřebuje vytvářet databázi kategorií a různých jídel, které dokáže připravovat.
 
 - **Tabulka 1** - `meals`
   - `name`
   - `description`
+  - `weight`
 - **Tabulka 2** - `categories`
   - `name`
 
-
-- **CRUDL (editovatelné)**: meals, categories
+- **CRUDL (editovatelné z UI)**: meals, categories
+- **Editovatelný vztah M:N**: jídlo spadá do více kategorií, kategorie má více jídel
 
 ### 3. Evidence návštěvníků muzea
-Záznam návštěvníků a jejich návštěv jednotlivých expozic.
+Muzeum potřebuje mít možnost ukládat seznam návštěvníků a jejich návštěv jednotlivých expozic spolu s datem jejich návštěv.
 
 - **Tabulka 1** - `visitors`
   - `firstname`
@@ -100,17 +103,17 @@ Záznam návštěvníků a jejich návštěv jednotlivých expozic.
 - **Tabulka 2** - `exhibits`
   - `name`
   - `description`
-- **Tabulka 3** - `visits`
+- **Tabulka 3 hint** - `visits`
   - `visitor_id`
   - `exhibit_id`
-  - `visit_date`
-
+  - `date`
 
 - **CRUDL (editovatelné)**: visitors, exhibits
-- **Neměnitelná tabulka (seedovaná při spuštění)**: visits
+- **Editovatelný vztah M:N**: návštěvník mohl navštívit více expozic, expozici navštěvuje více zákazníků. Každá návštěvy má konkrétní datum.
+
 
 ### 4. Správa domácích mazlíčků v útulku
-Útulek spravuje zvířata a jejich majitele.
+Útulek potřebuje evidovat zvířátka a jejich případné majitele (pokud si je někdo adoptuje) a čím bylo které zvířátko očkované.
 
 - **Tabulka 1** - `pets`
   - `name`
@@ -119,9 +122,11 @@ Záznam návštěvníků a jejich návštěv jednotlivých expozic.
   - `firstname`
   - `lastname`
   - `phone`
+- **Tabulka 3** - `vaccinations`
+  - `name`
+  - `date`
 
-
-- **CRUDL (editovatelné)**: pets, owners
+- **CRUDL (editovatelné)**: pets, owners, vaccinations
 
 ### 5. Správa kurzů v jazykové škole
 Záznam kurzů, lektorů a přihlášených studentů.
@@ -389,7 +394,7 @@ Záznam zaměstnanců, oddělení a projektů.
 
 
 - **CRUDL (editovatelné)**: employees, departments
-- **Neměnitelná tabulka (seedovaná při spuštění)**: projects
+- **Neměnitelná tabulka (seedovaná při seeding)**: projects
 
 ### 21. Správa školních tříd
 Evidence tříd, žáků a třídních učitelů.
