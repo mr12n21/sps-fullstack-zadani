@@ -192,8 +192,7 @@ Uživatelé hodnotí restaurace v České Lípě a přidávají komentáře. V s
 
 - **Tabulka 1** - `restaurants`
   - `name`
-  - `city`
-  - `street`
+  - `address`
 - **Tabulka 2** - `reviews`
   - `user_name`
   - `rating`
@@ -325,12 +324,11 @@ Evidence konferencí, řečníků a účastníků.
   - `firstname`
   - `lastname`
 - **Tabulka 3** - `attendees`
-  - `conference_id`
+  - `conference`
   - `attendee_name`
 
+- **CRUDL (editovatelné)**: conferences, speakers, attendees
 
-- **CRUDL (editovatelné)**: conferences, speakers
-- **Neměnitelná tabulka (seedovaná při spuštění)**: attendees
 
 ### 17. Správa objednávek v e-shopu
 Záznam produktů, zákazníků a objednávek.
