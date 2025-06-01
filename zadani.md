@@ -1,10 +1,6 @@
 # Témata Fullstack aplikací
-## Doporučený TechStack
-- **Frontend**: HTML, CSS, JavaScript
-  - Chceš si okořenit život? *React/Vue, TailwindCSS...*
-- **Backend**: Node.js, Express, Sqlite3
-- **Ostatní**: Git, Postman, VSCode
-  - Chceš psát hezký kód? *Biome*
+
+Fulltext zadání je na MS Teams
 
 ## Povinná struktura
 
