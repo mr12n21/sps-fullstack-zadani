@@ -52,7 +52,8 @@ nazev-projektu
 - `server.js` - hlavní spouštěcí soubor, který obsahuje všechny routy a nastavení serveru
 
 ## Témata
-Každé z témat je víceméně nějaký uživatelský formulář který dovoluje dělat CRUDL operace na 2-3 tabulkách. Tabulky jsou vždy propojeny cizím klíčem, je potřeba správně určit datové typy polí a přidat primární klíče. Při spuštění aplikace se databáze inicializuje a naplní nějakými ukázkovými daty. 
+Každé z témat je víceméně nějaký uživatelský formulář který dovoluje dělat CRUDL operace na cca 2 tabulkách. Tabulky jsou vždy propojeny cizím klíčem, je potřeba správně určit datové typy polí a přidat primární klíče. Při spuštění aplikace se databáze inicializuje (vytvoří se tabulky). Tabulky se naplní nějakými ukázkovými daty až při spuštění npm run seed.
+
 CRUDL znamená, že má uživatel možnost vykonat operace
 - Create
 - Read
@@ -81,6 +82,7 @@ Uživatelé mohou rezervovat sportoviště v různých časech.
 - **CRUDL (editovatelné z UI)**: sport_locations, reservations
 - **Neměnitelná tabulka (seedovaná při seeding)**: sports
 
+
 ### 2. Správa jídelníčku ve školní jídelně
 Školní jídelna si potřebuje vytvářet databázi kategorií a různých jídel, které dokáže připravovat.
 
@@ -92,7 +94,8 @@ Uživatelé mohou rezervovat sportoviště v různých časech.
   - `name`
 
 - **CRUDL (editovatelné z UI)**: meals, categories
-- **Editovatelný vztah M:N**: jídlo spadá do více kategorií, kategorie má více jídel
+- **Vztah M:N**: jídlo spadá do více kategorií, kategorie má více jídel
+
 
 ### 3. Evidence návštěvníků muzea
 Muzeum potřebuje mít možnost ukládat seznam návštěvníků a jejich návštěv jednotlivých expozic spolu s datem jejich návštěv.
@@ -109,7 +112,7 @@ Muzeum potřebuje mít možnost ukládat seznam návštěvníků a jejich návš
   - `date`
 
 - **CRUDL (editovatelné)**: visitors, exhibits
-- **Editovatelný vztah M:N**: návštěvník mohl navštívit více expozic, expozici navštěvuje více zákazníků. Každá návštěvy má konkrétní datum.
+- **Vztah M:N**: návštěvník mohl navštívit více expozic, expozici navštěvuje více zákazníků. Každá návštěvy má konkrétní datum.
 
 
 ### 4. Správa domácích mazlíčků v útulku
@@ -128,25 +131,26 @@ Muzeum potřebuje mít možnost ukládat seznam návštěvníků a jejich návš
 
 - **CRUDL (editovatelné)**: pets, owners, vaccinations
 
+
 ### 5. Správa kurzů v jazykové škole
-Záznam kurzů, lektorů a přihlášených studentů.
+Vysoká škola potřebuje plán kurzů, jednotlivých lekcí ze kterých se kurz skládá a aktivit, které se vybírají z banky existujících aktivit.
 
 - **Tabulka 1** - `courses`
   - `name`
-  - `level`
-- **Tabulka 2** - `teachers`
-  - `firstname`
-  - `lastname`
-- **Tabulka 3** - `enrollments`
-  - `student_name`
-  - `course_id`
+  - `code`
+- **Tabulka 2** - `lectures`
+  - `date`
+  - `topic`
+- **Tabulka 3** - `activities`
+  - `name`
+  - `description`
 
+- **CRUDL (editovatelné)**: courses, lectures
+- **Neměnitelná tabulka (seedovaná při spuštění)**: activities
 
-- **CRUDL (editovatelné)**: courses, teachers
-- **Neměnitelná tabulka (seedovaná při spuštění)**: enrollments
 
 ### 6. Správa aut v autopůjčovně
-Půjčovna eviduje auta, zákazníky a výpůjčky.
+Správce půjčovny eviduje auta, zákazníky a výpůjčky. Samotná výpůjčka je vždy svázána s jedním z aut a probíhá vždy v termínu od-do.
 
 - **Tabulka 1** - `cars`
   - `make`
@@ -155,18 +159,18 @@ Půjčovna eviduje auta, zákazníky a výpůjčky.
   - `firstname`
   - `lastname`
   - `driver_license`
-- **Tabulka 3** - `rentals`
+- **Tabulka 3 hint** - `rentals`
   - `car_id`
-  - `customer_id`
+  - `customer_id` 
   - `rental_date`
   - `return_date`
 
+- **CRUDL (editovatelné)**: visitors, exhibits
+- **Vztah M:N**: při výpůjčce je zadáno který zákazník si půjčuje které auto
 
-- **CRUDL (editovatelné)**: cars, customers
-- **Neměnitelná tabulka (seedovaná při spuštění)**: rentals
 
 ### 7. Sklad náhradních dílů
-Evidence dílů, dodavatelů a objednávek.
+Autoservis potřebuje evidovat sklad dílů, své dodavatele a objednávky konkrétních dílů.
 
 - **Tabulka 1** - `parts`
   - `name`
@@ -174,32 +178,32 @@ Evidence dílů, dodavatelů a objednávek.
 - **Tabulka 2** - `suppliers`
   - `name`
   - `contact`
-- **Tabulka 3** - `orders`
+- **Tabulka 3 hint** - `orders`
   - `part_id`
   - `supplier_id`
   - `order_date`
 
-
 - **CRUDL (editovatelné)**: parts, suppliers
-- **Neměnitelná tabulka (seedovaná při spuštění)**: orders
+- **Vztah M:N**: různé díly mohou být objednávány od různých dodavatelů
+
 
 ### 8. Systém hodnocení restaurací
-Uživatelé hodnotí restaurace a přidávají komentáře.
+Uživatelé hodnotí restaurace v České Lípě a přidávají komentáře. V systému je mimo jiné vidět, které restaurace jsou nejlépe hodnocené.
 
 - **Tabulka 1** - `restaurants`
   - `name`
-  - `location`
+  - `city`
+  - `street`
 - **Tabulka 2** - `reviews`
   - `user_name`
-  - `restaurant_id`
   - `rating`
   - `comment`
 
-
 - **CRUDL (editovatelné)**: restaurants, reviews
 
+
 ### 9. Správa inventáře kanceláře
-Sledování zásob, kategorií a dodavatelů.
+Malá zmrzlinárna potřebuje sledovat stav svých zásob, přiřazovat jim kategorie a dodavatele.
 
 - **Tabulka 1** - `items`
   - `name`
@@ -210,12 +214,12 @@ Sledování zásob, kategorií a dodavatelů.
   - `name`
   - `contact`
 
+- **CRUDL (editovatelné)**: items
+- **Neměnitelná tabulka (seedovaná při spuštění)**: suppliers, categories
 
-- **CRUDL (editovatelné)**: items, categories
-- **Neměnitelná tabulka (seedovaná při spuštění)**: suppliers
 
 ### 10. Evidence úkolů v týmu
-Správa projektových úkolů, přiřazení k členům týmu.
+Projektový manažer potřebuje správovat projektové úkoly a přiřazovat je k členům týmu.
 
 - **Tabulka 1** - `tasks`
   - `title`
@@ -224,41 +228,43 @@ Správa projektových úkolů, přiřazení k členům týmu.
 - **Tabulka 2** - `team_members`
   - `firstname`
   - `lastname`
-- **Tabulka 3** - `assignments`
-  - `task_id`
-  - `team_member_id`
-
+  - `emails`
 
 - **CRUDL (editovatelné)**: tasks, team_members
-- **Neměnitelná tabulka (seedovaná při spuštění)**: assignments
+- **Vztah M:N**: úkoly mohou být přiřazeny k více členům týmu, člen může mít více úkolů
+
 
 ### 11. Správa parkovacích míst v garáži
-Rezervace a správa parkovacích míst.
+Parkovací centrum potřebuje spravovat rezervace a správa parkovacích míst.
 
 - **Tabulka 1** - `parking_spots`
   - `number`
   - `level`
 - **Tabulka 2** - `reservations`
-  - `spot_id`
   - `vehicle_plate`
   - `reservation_date`
-
+  - `firstname`
+  - `lastname`
+  - `email`
 
 - **CRUDL (editovatelné)**: parking_spots, reservations
 
+
 ### 12. Katalog filmů a hodnocení
-Evidence filmů a uživatelských hodnocení.
+Nová platforma a lá ČSFD chce evidovat filmy a uživatelská hodnocení.
 
 - **Tabulka 1** - `movies`
   - `title`
-  - `genre`
+  - `year`
 - **Tabulka 2** - `ratings`
-  - `user_name`
-  - `movie_id`
+  - `username`
   - `rating`
-
+- **Tabulka 3** - `genres`
+  - `name`
 
 - **CRUDL (editovatelné)**: movies, ratings
+- **Neměnitelná tabulka (seedovaná při spuštění)**: genres
+
 
 ### 13. Správa fitness centra
 Záznam členů, cvičebních plánů a rezervací lekcí.
@@ -269,14 +275,10 @@ Záznam členů, cvičebních plánů a rezervací lekcí.
 - **Tabulka 2** - `workout_plans`
   - `name`
   - `description`
-- **Tabulka 3** - `class_reservations`
-  - `member_id`
-  - `class_id`
-  - `reservation_date`
-
 
 - **CRUDL (editovatelné)**: members, workout_plans
-- **Neměnitelná tabulka (seedovaná při spuštění)**: class_reservations
+- **Vztah M:N**: člen může mít přiřazeno více workout plánů, workout plán má více členů
+
 
 ### 14. Evidence návštěv v zoo
 Záznam návštěvníků a zvířat, která viděli.
@@ -287,29 +289,31 @@ Záznam návštěvníků a zvířat, která viděli.
 - **Tabulka 2** - `animals`
   - `name`
   - `species`
-- **Tabulka 3** - `visits`
+- **Tabulka 3 hint** - `visits`
   - `visitor_id`
   - `animal_id`
   - `visit_date`
 
-
 - **CRUDL (editovatelné)**: visitors, animals
-- **Neměnitelná tabulka (seedovaná při spuštění)**: visits
+- **Vztah M:N**: návštěvníci vidí více zvířat, zvířata jsou viděna více návštěvníky
+
 
 ### 15. Správa knih v antikvariátu
-Evidování knih, autorů a žánrů.
+Místní antikvariát potřebuje systém pro evidování knih, autorů a žánrů.
 
 - **Tabulka 1** - `books`
   - `title`
+  - `year`
+  - `language`
 - **Tabulka 2** - `authors`
   - `firstname`
   - `lastname`
 - **Tabulka 3** - `genres`
   - `name`
 
-
 - **CRUDL (editovatelné)**: books, authors
 - **Neměnitelná tabulka (seedovaná při spuštění)**: genres
+
 
 ### 16. Systém správy konferencí
 Evidence konferencí, řečníků a účastníků.
