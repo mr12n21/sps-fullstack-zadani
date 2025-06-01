@@ -1,6 +1,6 @@
 # Témata Fullstack aplikací
 
-Fulltext zadání je na MS Teams
+Fulltext zadání je na MS Teams, téma si registrujete [zde](https://docs.google.com/spreadsheets/d/1UV1aWBZd9Ea79YVq9Ztd8zeMQ-6hb5Lp/edit?usp=sharing&ouid=113674919573128162089&rtpof=true&sd=true)
 
 ## Povinná struktura
 
