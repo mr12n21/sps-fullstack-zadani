@@ -18,16 +18,16 @@ nazev-projektu
 │   │
 │   └───assets
 │       │   místo pro obrázky, styles.css...
-│   
+│
 └───api
 │   │   nějaký js soubor s routováním
-│   
+│
 └───database
 │   │   db.js       // Database connection logic
 │   │   schema.sql  // Schema definition
 │   │   seed.js     // Script for seeding the database
 │   │   seed.sql    // Seed data (INSERT statements)
-│   
+│
 │   server.js
 ```
 
@@ -157,7 +157,7 @@ Správce půjčovny eviduje auta, zákazníky a výpůjčky. Samotná výpůjčk
   - `driver_license`
 - **Tabulka 3 hint** - `rentals`
   - `car_id`
-  - `customer_id` 
+  - `customer_id`
   - `rental_date`
   - `return_date`
 
@@ -339,7 +339,7 @@ Učitelé potřebují systém, kde mohou spravovat zasedací pořídek. Počíte
 - **Tabulka 3** - `seating_plans` - seznam zasedání žáků na místech
   - `firstname` - jméno žáka
   - `lastname` - příjmení žáka
-    
+
 - **CRUDL (editovatelné):** subjects, seating_plans
 - **Neměnitelná tabulka (seedovaná při spuštění):** places
 
@@ -356,7 +356,6 @@ Počítejte, že žánry jsou pevně dané a nebudou se měnit.
   - `nationality` - národnost autora
 - **Tabulka 3** - `genres` - seznam žánrů
   - `name` - název žánru
-    
+
 - **CRUDL (editovatelné):** books, authors
 - **Neměnitelná tabulka (seedovaná při spuštění):** genres
-
