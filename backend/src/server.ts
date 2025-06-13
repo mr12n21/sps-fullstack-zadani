@@ -1,17 +1,19 @@
-import express from 'express';
-import cors from 'cors';
-import routes from './api/routes';
-import { sequelize } from './database/db';
+import express from "express";
+import bodyParser from "body-parser";
+import exhibitsRouter from "./api/exhibits";
+import visitsRouter from "./api/visits";
+import path from "path";
+
 
 const app = express();
-const PORT = 3000;
 
-app.use(cors());
-app.use(express.json());
-app.use('/api', routes);
+// Nastavení Pug view engine
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
 
-sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
-});
+app.use(bodyParser.json());
+
+app.use("/api/exhibits", exhibitsRouter);
+app.use("/api/visits", visitsRouter);
+
+export default app;

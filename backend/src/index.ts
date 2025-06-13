@@ -1,20 +1,38 @@
-import "reflect-metadata";
-import express from "express";
-import dotenv from "dotenv";
 import { AppDataSource } from "./db";
-
-dotenv.config();
-const app = express();
-app.use(express.json());
+import app from "./server";
+import { User } from "./entity/User";
+import { seed } from "./seed";
 
 AppDataSource.initialize()
-  .then(() => {
-    console.log("Connected to DB");
+  .then(async () => {
+    console.log("Data Source initialized");
+
+    await seed();
+
+    app.get("/api/users", async (req, res) => {
+      const userRepo = AppDataSource.getRepository(User);
+      const users = await userRepo.find();
+      res.json(users);
+    });
+
+    app.post("/api/users", async (req, res) => {
+      const userRepo = AppDataSource.getRepository(User);
+      const user = new User();
+      user.name = req.body.name;
+      await userRepo.save(user);
+      res.status(201).json(user);
+    });
+
+    app.get("/", async (req, res) => {
+      const userRepo = AppDataSource.getRepository(User);
+      const users = await userRepo.find();
+      res.render("index", { users });
+    });
 
     app.listen(3000, () => {
-      console.log("Server running on port 3000");
+      console.log("Server is running on http://localhost:3000");
     });
   })
-  .catch((err) => {
-    console.error("Database connection error:", err);
+  .catch((error) => {
+    console.error("DB initialization failed:", error);
   });
