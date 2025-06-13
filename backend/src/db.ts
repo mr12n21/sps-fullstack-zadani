@@ -1,4 +1,4 @@
-// src/db.ts
+import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Visitor } from "./entity/Visitor";
 import { Exhibit } from "./entity/Exhibit";

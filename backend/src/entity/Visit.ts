@@ -1,18 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from "typeorm";
-import { Visitor } from "./Visitor";
-import { Exhibit } from "./Exhibit";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Visit } from "./Visit";
 
 @Entity()
-export class Visit {
+export class Exhibit {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
-  @ManyToOne(() => Visitor, (visitor) => visitor.visits)
-  visitor: Visitor;
+  @Column() name!: string;
+  @Column() description!: string;
 
-  @ManyToOne(() => Exhibit, (exhibit) => exhibit.visits)
-  exhibit: Exhibit;
-
-  @Column({ type: "date" })
-  date: string;
+  @OneToMany(() => Visit, (v) => v.exhibit)
+  visits!: Visit[];
 }

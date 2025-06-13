@@ -5,15 +5,21 @@ import exhibitRoutes from "./api/exhibits";
 import visitRoutes from "./api/visits";
 
 AppDataSource.initialize()
-  .then(async () => {
-    console.log("Data Source initialized");
+  .then(() => {
+    console.log("DB initialized");
 
     app.use("/api/visitors", visitorRoutes);
     app.use("/api/exhibits", exhibitRoutes);
     app.use("/api/visits", visitRoutes);
 
+    app.get("/", (_req, res) => {
+      res.send("Museum API is running");
+    });
+
     app.listen(3000, () => {
-      console.log("Server is running on http://localhost:3000");
+      console.log("Server listening on http://localhost:3000");
     });
   })
-  .catch((error) => console.error("DB initialization failed:", error));
+  .catch((e) => {
+    console.error("DB init failed:", e);
+  });

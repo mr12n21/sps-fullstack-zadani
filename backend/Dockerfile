@@ -1,6 +1,6 @@
-FROM node:22
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json", "tsconfig.json", ".env", "./"]
+FROM node:22-alpine
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
 COPY . .
 CMD ["npm", "run", "start"]
