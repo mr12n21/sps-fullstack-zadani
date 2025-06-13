@@ -4,14 +4,14 @@ import { Visit } from "./Visit";
 @Entity()
 export class Visitor {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column()
-  firstname!: string;
+  firstname: string;
 
   @Column()
-  lastname!: string;
+  lastname: string;
 
   @OneToMany(() => Visit, (visit) => visit.visitor)
-  visits!: Visit[];
+  visits: Visit[];
 }

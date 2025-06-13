@@ -1,18 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from "typeorm";
 import { Visitor } from "./Visitor";
 import { Exhibit } from "./Exhibit";
 
 @Entity()
 export class Visit {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
-  @ManyToOne(() => Visitor, (visitor) => visitor.visits, { onDelete: 'CASCADE' })
-  visitor!: Visitor;
+  @ManyToOne(() => Visitor, (visitor) => visitor.visits)
+  visitor: Visitor;
 
-  @ManyToOne(() => Exhibit, (exhibit) => exhibit.visits, { onDelete: 'CASCADE' })
-  exhibit!: Exhibit;
+  @ManyToOne(() => Exhibit, (exhibit) => exhibit.visits)
+  exhibit: Exhibit;
 
-  @Column()
-  visit_date!: Date;
+  @Column({ type: "date" })
+  date: string;
 }

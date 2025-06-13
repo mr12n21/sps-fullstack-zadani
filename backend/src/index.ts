@@ -1,38 +1,19 @@
 import { AppDataSource } from "./db";
 import app from "./server";
-import { User } from "./entity/User";
-import { seed } from "./seed";
+import visitorRoutes from "./api/visitors";
+import exhibitRoutes from "./api/exhibits";
+import visitRoutes from "./api/visits";
 
 AppDataSource.initialize()
   .then(async () => {
     console.log("Data Source initialized");
 
-    await seed();
-
-    app.get("/api/users", async (req, res) => {
-      const userRepo = AppDataSource.getRepository(User);
-      const users = await userRepo.find();
-      res.json(users);
-    });
-
-    app.post("/api/users", async (req, res) => {
-      const userRepo = AppDataSource.getRepository(User);
-      const user = new User();
-      user.name = req.body.name;
-      await userRepo.save(user);
-      res.status(201).json(user);
-    });
-
-    app.get("/", async (req, res) => {
-      const userRepo = AppDataSource.getRepository(User);
-      const users = await userRepo.find();
-      res.render("index", { users });
-    });
+    app.use("/api/visitors", visitorRoutes);
+    app.use("/api/exhibits", exhibitRoutes);
+    app.use("/api/visits", visitRoutes);
 
     app.listen(3000, () => {
       console.log("Server is running on http://localhost:3000");
     });
   })
-  .catch((error) => {
-    console.error("DB initialization failed:", error);
-  });
+  .catch((error) => console.error("DB initialization failed:", error));
