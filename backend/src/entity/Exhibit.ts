@@ -5,8 +5,13 @@ import { Visit } from "./Visit";
 export class Exhibit {
   @PrimaryGeneratedColumn()
   id!: number;
-  @Column() name!: string;
-  @Column() description!: string;
-  @OneToMany(() => Visit, (v) => v.exhibit)
+
+  @Column()
+  name!: string;
+
+  @Column()
+  description!: string;
+
+  @OneToMany(() => Visit, (visit) => visit.exhibit)
   visits!: Visit[];
 }

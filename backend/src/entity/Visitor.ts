@@ -1,26 +1,17 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-  CreateDateColumn,
-} from "typeorm";
-import { Visitor } from "./Visitor";
-import { Exhibit } from "./Exhibit";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Visit } from "./Visit";
 
 @Entity()
-export class Visit {
+export class Visitor {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @CreateDateColumn({ name: "visit_date", type: "timestamp" })
-  visit_date!: Date;
+  @Column()
+  firstname!: string;
 
-  @ManyToOne(() => Visitor, (v) => v.visits, { onDelete: "CASCADE" })
-  @JoinColumn({ name: "visitorId" })
-  visitor!: Visitor;
+  @Column()
+  lastname!: string;
 
-  @ManyToOne(() => Exhibit, (e) => e.visits, { onDelete: "CASCADE" })
-  @JoinColumn({ name: "exhibitId" })
-  exhibit!: Exhibit;
+  @OneToMany(() => Visit, (visit) => visit.visitor)
+  visits!: Visit[];
 }
