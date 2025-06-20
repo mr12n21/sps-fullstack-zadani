@@ -1,30 +1,40 @@
-services:
-  backend:
-    build: ./backend
-    container_name: backend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: appdb
+  services:
+    backend:
+      build: ./backend
+      container_name: backend
+      ports:
+        - "3000:3000"
+      depends_on:
+        - db
+      environment:
+        DB_HOST: db
+        DB_PORT: 5432
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DB_NAME: appdb
 
-  db:
-    image: postgres:15
-    container_name: db
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: appdb
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+    db:
+      image: postgres:15
+      container_name: db
+      restart: always
+      environment:
+        DB_HOST: db
+        DB_PORT: 5432
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DB_NAME: appdb
 
-volumes:
-  pgdata:
+      ports:
+        - "5432:5432"
+      volumes:
+        - pgdata:/var/lib/postgresql/data
+
+    frontend:
+        build: ./frontend
+        ports:
+          - "8080:80"
+        depends_on:
+          - backend
+
+  volumes:
+    pgdata:
