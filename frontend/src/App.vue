@@ -1,85 +1,100 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div style="max-width: 800px; margin: auto; padding: 20px; font-family: sans-serif">
+    <h1>Museum Admin Panel</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <h2>Create Visitor</h2>
+    <input v-model="visitor.firstname" placeholder="Firstname" />
+    <input v-model="visitor.lastname" placeholder="Lastname" />
+    <button @click="createVisitor">Create Visitor</button>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+    <h2>Create Exhibit</h2>
+    <input v-model="exhibit.name" placeholder="Exhibit Name" />
+    <input v-model="exhibit.description" placeholder="Description" />
+    <button @click="createExhibit">Create Exhibit</button>
 
-  <RouterView />
+    <h2>Create Visit</h2>
+    <input v-model.number="visit.visitorId" placeholder="Visitor ID" />
+    <input v-model.number="visit.exhibitId" placeholder="Exhibit ID" />
+    <input v-model="visit.date" type="date" />
+    <button @click="createVisit">Create Visit</button>
+
+    <h2>All Visits</h2>
+    <button @click="loadVisits">Load Visits</button>
+    <ul>
+      <li v-for="v in visits" :key="v.id">
+        Visitor #{{ v.visitorId }} visited Exhibit #{{ v.exhibitId }} on {{ v.date }}
+      </li>
+    </ul>
+  </div>
 </template>
 
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+
+const api = '/api' // Použití relativní cesty pro proxy ve Vite
+
+const visitor = ref({ firstname: '', lastname: '' })
+const exhibit = ref({ name: '', description: '' })
+const visit = ref({ visitorId: '', exhibitId: '', date: '' })
+const visits = ref([])
+
+async function createVisitor() {
+  try {
+    const response = await axios.post(`${api}/visitors`, visitor.value)
+    console.log('Visitor created:', response.data)
+    visitor.value = { firstname: '', lastname: '' }
+  } catch (error) {
+    console.error('Error creating visitor:', error)
+  }
+}
+
+async function createExhibit() {
+  try {
+    const response = await axios.post(`${api}/exhibits`, exhibit.value)
+    console.log('Exhibit created:', response.data)
+    exhibit.value = { name: '', description: '' }
+  } catch (error) {
+    console.error('Error creating exhibit:', error)
+  }
+}
+
+async function createVisit() {
+  try {
+    const response = await axios.post(`${api}/visits`, visit.value)
+    console.log('Visit created:', response.data)
+    visit.value = { visitorId: '', exhibitId: '', date: '' }
+    loadVisits()
+  } catch (error) {
+    console.error('Error creating visit:', error)
+  }
+}
+
+async function loadVisits() {
+  try {
+    const response = await axios.get(`${api}/visits`)
+    visits.value = response.data
+  } catch (error) {
+    console.error('Error loading visits:', error)
+  }
+}
+
+onMounted(() => {
+  loadVisits()
+})
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
+input {
   display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+  margin-bottom: 10px;
+  padding: 6px;
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  max-width: 300px;
 }
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+button {
+  padding: 6px 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 </style>
